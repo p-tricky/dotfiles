@@ -1,13 +1,53 @@
+#dotfiles
 ln -s dotfiles/editrc .editrc
 ln -s dotfiles/inputrc .inputrc
+ln -s dotfiles/irbrc .irbrc
 ln -s dotfiles/pystartup .pystartup
+ln -s dotfiles/latexmkrc .latexmkrc
 
+#oh-my-zsh
 sudo apt-get update && sudo apt-get install zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 mv .zshrc zshrc.bk
 ln -s dotfiles/zshrc .zshrc
 cd .oh-my-zsh
 git apply ../dotfiles/zsh_history.patch
-cd
 cat -n .bash_history | sort -k2 -k1n | uniq -f1 | sort -nk1,1 | cut -f2- >> .zsh_history
 
+#pip and virtual env
+curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo
+python2.7
+sudo pip install virtualenvwrapper virtualenv
+
+#powerline                                           
+pip install --user git+git://github.com/Lokaltog/powerline
+wget https://github.com/Lokaltog/powerline/raw/develop/font/PowerlineSymbols.otf https://github.com/Lokaltog/powerline/raw/develop/font/10-powerline-symbols.conf
+mkdir -p ~/.fonts/ && mv PowerlineSymbols.otf ~/.fonts/
+fc-cache -vf ~/.fonts
+mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
+
+
+#tmux
+sudo apt-get install -y python-software-properties software-properties-common 
+sudo add-apt-repository -y ppa:pi-rho/dev                                    
+sudo apt-get install -y tmux=2.0-1~ppa1~t
+git clone git@github.com:p-tricky/tmux-config.git .tmux
+ln -s .tmux.conf .tmux/tmux.conf
+cd .tmux 
+git submodule update --init --recursive
+<prefix> I
+
+#global npm and jshint
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+sudo apt-get install nodejs
+sudo npm install -g jshint
+
+#vim
+sudo apt-get install vim-gnome golang build-essential cmake
+git clone git@github.com:p-tricky/vim-config.git .vim
+cd .vim/bundle && ./get
+cd vim-tern/
+npm install
+cd vim-ycm/
+git submodule update --init --recursive
+./install.py --gocode-completer --tern-completer
