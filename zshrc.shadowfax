@@ -93,7 +93,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
-export CUDA_HOME=/usr/local/cuda-7.5/
+export CUDA_HOME=/usr/local/cuda-7.0/
 export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
  
 PATH=$PATH:${CUDA_HOME}/bin 
