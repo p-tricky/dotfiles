@@ -99,5 +99,10 @@ export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
 PATH=$PATH:${CUDA_HOME}/bin 
 export PATH
 
+# docker
+export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
+export CUDA_SO="$(ls /usr/lib/x86_64-linux-gnu/libcuda.* | xargs -I{} printf '-v {}:{} ')"
+alias drtfgpu="docker run -it -p 8888:8888 $DEVICES $CUDA_SO -v /home/lotus/Dropbox/MachineLearning:/workspace gcr.io/tensorflow/tensorflow:latest-gpu"
+
 export NVM_DIR="/home/lotus/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

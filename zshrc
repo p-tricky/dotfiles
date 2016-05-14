@@ -93,10 +93,16 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
+# docker
+export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
+export CUDA_SO="$(ls /usr/lib/x86_64-linux-gnu/libcuda.* | xargs -I{} printf '-v {}:{} ')"
+alias drtfgpu="docker run -it -p 8888:8888 $DEVICES $CUDA_SO -v /home/lotus/Dropbox/MachineLearning:/workspace gcr.io/tensorflow/tensorflow:latest-gpu"
+
+
 #java stuff
-JAVA_HOME=/usr/local/java/jdk1.8.0_60
-JRE_HOME=$JAVA_HOME/jre
-PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
-export JAVA_HOME
-export JRE_HOME
-export PATH
+#JAVA_HOME=/usr/local/java/jdk1.8.0_60
+#JRE_HOME=$JAVA_HOME/jre
+#PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
+#export JAVA_HOME
+#export JRE_HOME
+#export PATH
