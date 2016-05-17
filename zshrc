@@ -96,7 +96,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 # docker
 export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
 export CUDA_SO="$(ls /usr/lib/x86_64-linux-gnu/libcuda.* | xargs -I{} printf '-v {}:{} ')"
-alias drtfgpu="docker run -it -p 8888:8888 $DEVICES $CUDA_SO -v /home/lotus/Dropbox/MachineLearning:/workspace gcr.io/tensorflow/tensorflow:latest-gpu"
+alias drtfgpu="docker run -it $DEVICES $CUDA_SO $DOCKER_EXTRAS -v /home/lotus/Dropbox/MachineLearning:/workspace gcr.io/tensorflow/tensorflow:latest-gpu"
 
 
 #java stuff
