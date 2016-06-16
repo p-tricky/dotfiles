@@ -98,6 +98,15 @@ export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
 export CUDA_SO="$(ls /usr/lib/x86_64-linux-gnu/libcuda.* | xargs -I{} printf '-v {}:{} ')"
 alias drtfgpu="docker run -it $DEVICES $CUDA_SO $DOCKER_EXTRAS -v /home/lotus/Dropbox/MachineLearning:/workspace gcr.io/tensorflow/tensorflow:latest-gpu"
 
+# create github repo and push
+function newgithubrepo() {
+  curl -u 'p-tricky' https://api.github.com/user/repos -d '{"name":"'$1'"}'
+  if [ -n "$2" ] ; then
+    git remote add $2 git@github.com:p-tricky/$1.git
+  else
+    git remote add origin git@github.com:p-tricky/$1.git
+  fi
+}
 
 #java stuff
 #JAVA_HOME=/usr/local/java/jdk1.8.0_60

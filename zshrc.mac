@@ -94,18 +94,40 @@ export LESS=-r
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools" # Add RVM to PATH for scripting
+export PATH="$PATH:/Applications/gnubg.app/Contents/MacOS/local/bin/" # Add RVM to PATH for scripting
 export EDITOR="/usr/local/bin/Vim"
 export STUDIO_JDK=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk
 
 #hist search vi-mode
 bindkey '^R' history-incremental-pattern-search-backward
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/Users/patrickloftus/google-cloud-sdk/path.zsh.inc'
+# virtualenv and virtualenvwrapper
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+function frameworkpython {
+  if [[ ! -z "$VIRTUAL_ENV" ]]; then
+    PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+  else
+    /usr/local/bin/python "$@"
+  fi
+}
 
 # The next line enables shell command completion for gcloud.
 source '/Users/patrickloftus/google-cloud-sdk/completion.zsh.inc'
 
+# python virtualenv autoload
+source /usr/local/opt/autoenv/activate.sh
+
 # for sed on mac
 export LC_CTYPE=C
 export LANG=C
+
+function newgithubrepo() {
+  curl -u 'p-tricky' https://api.github.com/user/repos -d '{"name":"'$1'"}'
+  if [ -n "$2" ] ; then
+    git remote add $2 git@github.com:p-tricky/$1.git
+  else
+    git remote add origin git@github.com:p-tricky/$1.git
+  fi
+}

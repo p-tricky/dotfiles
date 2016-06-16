@@ -109,3 +109,14 @@ export NVM_DIR="/home/lotus/.nvm"
 
 # python virtualenv autoload
 source ~/.autoenv/activate.sh
+
+# create github repo and push
+function newgithubrepo() {
+  curl -u 'p-tricky' https://api.github.com/user/repos -d '{"name":"'$1'"}'
+  if [ -n "$2" ] ; then
+    git remote add $2 git@github.com:p-tricky/$1.git
+  else
+    git remote add origin git@github.com:p-tricky/$1.git
+  fi
+}
+
