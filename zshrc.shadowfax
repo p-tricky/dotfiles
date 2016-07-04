@@ -57,11 +57,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -84,7 +80,9 @@ export PYTHONSTARTUP=~/.pystartup
 # hist search vi-mode
 bindkey '^R' history-incremental-pattern-search-backward
 
-PATH=$PATH:~/.local/bin:~/android-studio/bin
+#PATH=$PATH:~/.local/bin:~/android-studio/bin
+PATH=$PATH:~/.local/bin
+alias studio="./android-studio/studio_no_ibus"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
