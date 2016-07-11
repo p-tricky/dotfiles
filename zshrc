@@ -108,6 +108,15 @@ function newgithubrepo() {
   fi
 }
 
+function newbitbucketrepo() {
+  curl --user p-tricky https://api.bitbucket.org/1.0/repositories/ --data name=$1
+  if [ -n "$2" ] ; then
+    git remote add $2 git@bitbucket.org:p-tricky/$1.git
+  else
+    git remote add origin git@bitbucket.org:p-tricky/$1.git
+  fi
+}
+
 #java stuff
 #JAVA_HOME=/usr/local/java/jdk1.8.0_60
 #JRE_HOME=$JAVA_HOME/jre

@@ -131,3 +131,15 @@ function newgithubrepo() {
     git remote add origin git@github.com:p-tricky/$1.git
   fi
 }
+
+function newbitbucketrepo() {
+  curl --user p-tricky https://api.bitbucket.org/1.0/repositories/ --data name=$1
+  if [ -n "$2" ] ; then
+    git remote add $2 git@bitbucket.org:p-tricky/$1.git
+  else
+    git remote add origin git@bitbucket.org:p-tricky/$1.git
+  fi
+}
+
+export NVM_DIR="/Users/patrickloftus/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
