@@ -81,8 +81,9 @@ export PYTHONSTARTUP=~/.pystartup
 bindkey '^R' history-incremental-pattern-search-backward
 
 #PATH=$PATH:~/.local/bin:~/android-studio/bin
-PATH=$PATH:~/.local/bin
-alias studio="./android-studio/studio_no_ibus"
+export ANDROID_HOME=~/Android/Sdk/
+PATH=$PATH:~/.local/bin:$ANDROID_HOME/platform-tools/
+alias studio=$HOME"/android-studio/studio_no_ibus"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
@@ -128,7 +129,7 @@ function newbitbucketrepo() {
 }
 
 #java stuff
-JAVA_HOME=/usr/local/java/jdk1.8.0_60
+JAVA_HOME=/usr/local/java/jdk1.8.0_65
 JRE_HOME=$JAVA_HOME/jre
 PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
 export JAVA_HOME
