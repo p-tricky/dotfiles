@@ -120,8 +120,7 @@ source '/Users/patrickloftus/google-cloud-sdk/completion.zsh.inc'
 source /usr/local/opt/autoenv/activate.sh
 
 # for sed on mac
-export LC_CTYPE=C
-export LANG=C
+alias sed='LC_ALL=C sed'
 
 function newgithubrepo() {
   curl -u 'p-tricky' https://api.github.com/user/repos -d '{"name":"'$1'"}'
