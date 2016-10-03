@@ -83,7 +83,6 @@ bindkey '^R' history-incremental-pattern-search-backward
 #PATH=$PATH:~/.local/bin:~/android-studio/bin
 export ANDROID_HOME=~/Android/Sdk/
 PATH=$PATH:~/.local/bin:$ANDROID_HOME/platform-tools/
-alias studio=$HOME"/android-studio/studio_no_ibus"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
