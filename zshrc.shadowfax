@@ -74,7 +74,6 @@ export EDITOR='vim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # export PATH="$PATH:/usr/lib/node_modules/jsctags/bin/jsctags"
-alias tmux="tmux -2"
 export PYTHONSTARTUP=~/.pystartup
 
 # hist search vi-mode
@@ -82,20 +81,14 @@ bindkey '^R' history-incremental-pattern-search-backward
 
 #PATH=$PATH:~/.local/bin:~/android-studio/bin
 export ANDROID_HOME=~/Android/Sdk/
-PATH=$PATH:~/.local/bin:$ANDROID_HOME/platform-tools/
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # virtualenv and virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
-export CUDA_HOME=/usr/local/cuda-7.0/
-export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
- 
-PATH=$PATH:${CUDA_HOME}/bin 
-export PATH
+export CUDA_HOME=/usr/local/cuda-8.0/
 
 # docker
 export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
@@ -130,7 +123,15 @@ function newbitbucketrepo() {
 #java stuff
 JAVA_HOME=/usr/local/java/jdk1.8.0_65
 JRE_HOME=$JAVA_HOME/jre
-PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
 export JAVA_HOME
 export JRE_HOME
-export PATH
+
+#path stuff no duplicates
+if [[ -z $TMUX ]]; then 
+  PATH=$PATH:~/.local/bin:$ANDROID_HOME/platform-tools/
+  PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
+  PATH=$PATH:${CUDA_HOME}/bin 
+  export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+  export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
+  . ~/torch/install/bin/torch-activate
+fi
