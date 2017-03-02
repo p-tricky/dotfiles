@@ -78,8 +78,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # export PATH="/usr/lib/node_modules/jsctags/bin/jsctags:$PATH"
-alias recents="history | grep"
-alias tmux="tmux -2"
 export PYTHONSTARTUP=~/.pystartup
 
 # hist search vi-mode
@@ -87,16 +85,23 @@ bindkey '^R' history-incremental-pattern-search-backward
 
 PATH=$PATH:~/.local/bin
 
+# Android
+PATH=$PATH:~/Android/Sdk/tools:~/Android/Sdk/platform-tools/
+
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
+export PATH=${CUDA_HOME}/bin:${PATH}
+
 # docker
-export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
-export CUDA_SO="$(ls /usr/lib/x86_64-linux-gnu/libcuda.* | xargs -I{} printf '-v {}:{} ')"
-alias drtfgpu="docker run -it $DEVICES $CUDA_SO $DOCKER_EXTRAS -v /home/lotus/Dropbox/MachineLearning:/workspace gcr.io/tensorflow/tensorflow:latest-gpu"
+#export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
+#export CUDA_SO="$(ls /usr/lib/x86_64-linux-gnu/libcuda.* | xargs -I{} printf '-v {}:{} ')"
+#alias drtfgpu="docker run -it $DEVICES $CUDA_SO $DOCKER_EXTRAS -v /home/lotus/Dropbox/MachineLearning:/workspace gcr.io/tensorflow/tensorflow:latest-gpu"
 
 # create github repo and push
 function newgithubrepo() {

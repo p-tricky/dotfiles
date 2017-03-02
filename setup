@@ -6,7 +6,7 @@ ln -s dotfiles/pystartup .pystartup
 ln -s dotfiles/latexmkrc .latexmkrc
 
 #oh-my-zsh
-sudo apt-get update && sudo apt-get install zsh
+sudo apt-get update && sudo apt-get install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 mv .zshrc zshrc.bk
 ln -s dotfiles/zshrc .zshrc
@@ -28,26 +28,23 @@ mkdir -p ~/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf ~/.config/
 
 
 #tmux
-sudo apt-get install -y python-software-properties software-properties-common 
-sudo add-apt-repository -y ppa:pi-rho/dev                                    
-sudo apt-get install -y tmux=2.0-1~ppa1~t
+sudo apt-get install -y tmux
 git clone git@github.com:p-tricky/tmux-config.git .tmux
-ln -s .tmux.conf .tmux/tmux.conf
+ln -s .tmux/tmux.conf .tmux.conf 
 cd .tmux 
 git submodule update --init --recursive
 <prefix> I
 
 #global npm and jshint
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-sudo apt-get install nodejs
 sudo npm install -g jshint
 
 #vim
-sudo apt-get install vim-gnome golang build-essential cmake
+sudo apt-get install -y vim-gnome golang build-essential cmake
 git clone git@github.com:p-tricky/vim-config.git .vim
-cd .vim/bundle && ./get
+cd ~/.vim/bundle && ./get
 cd vim-tern/
 npm install
 cd vim-ycm/
 git submodule update --init --recursive
-./install.py --gocode-completer --tern-completer
+#./install.py --gocode-completer --tern-completer
