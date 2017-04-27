@@ -122,6 +122,35 @@ function newbitbucketrepo() {
   fi
 }
 
+alias setuptmux="cd $HOME && git clone git@github.com:p-tricky/tmux-config.git .tmux && \
+  ln -s .tmux/.tmux.conf .tmux.conf && cd .tmux  && git submodule update --init --recursive"
+
+alias setuppip="curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python3\
+  sudo pip3 intall virtualenvwrapper virtualenv\
+  pip3 install --user git+git://github.com/Lokaltog/powerline\
+  wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf\
+  mkdir -p $HOME/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf $HOME/.config/fontconfig/conf.d/ "
+
+alias installmysoftware="sudo apt-get install -y tmux\
+  git\
+  python-devel\
+  build-essential\
+  cmake\
+  python3-dev\
+  python-dev\
+  xclip\
+  exuberant-ctags"
+
+alias installvim="\
+  cd $HOME\
+  git clone git@github.org:p-tricky/vim-config.git .vim\
+  ln -s .vim/vimrc .vimrc"
+
+alias installcudaami="\
+  sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub\
+  sudo sh -c 'echo \"deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /\" > /etc/apt/sources.list.d/cuda.list'\
+  sudo apt-get update && sudo apt-get install -y --no-install-recommends cuda-drivers"
+
 #java stuff
 #JAVA_HOME=/usr/local/java/jdk1.8.0_60
 #JRE_HOME=$JAVA_HOME/jre
