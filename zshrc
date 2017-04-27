@@ -88,10 +88,11 @@ PATH=$PATH:~/.local/bin
 # Android
 PATH=$PATH:~/Android/Sdk/tools:~/Android/Sdk/platform-tools/
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/miniconda3/bin
 
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
 export CUDA_HOME=/usr/local/cuda
@@ -122,33 +123,36 @@ function newbitbucketrepo() {
   fi
 }
 
-alias setuptmux="cd $HOME && git clone git@github.com:p-tricky/tmux-config.git .tmux && \
+alias setuptmux="cd $HOME && git clone git@github.com:p-tricky/tmux-config.git .tmux &&\
   ln -s .tmux/.tmux.conf .tmux.conf && cd .tmux  && git submodule update --init --recursive"
 
-alias setuppip="curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python3\
-  sudo pip3 intall virtualenvwrapper virtualenv\
-  pip3 install --user git+git://github.com/Lokaltog/powerline\
-  wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf\
-  mkdir -p $HOME/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf $HOME/.config/fontconfig/conf.d/ "
+alias setuppip="curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | sudo python3 &&\
+  sudo pip3 install virtualenvwrapper virtualenv &&\
+  pip3 install --user git+git://github.com/Lokaltog/powerline &&\
+  wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf &&\
+  mkdir $HOME/.fonts/ && mv PowerlineSymbols.otf $HOME/.fonts/ && fc-cache -vf $HOME/.fonts/ &&\
+  wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf &&\
+  mkdir -p $HOME/.config/fontconfig/conf.d/ && mv 10-powerline-symbols.conf $HOME/.config/fontconfig/conf.d/"
 
 alias installmysoftware="sudo apt-get install -y tmux\
   git\
-  python-devel\
   build-essential\
   cmake\
   python3-dev\
   python-dev\
   xclip\
-  exuberant-ctags"
+  exuberant-ctags\
+  vim-gnome"
 
-alias installvim="\
-  cd $HOME\
-  git clone git@github.org:p-tricky/vim-config.git .vim\
-  ln -s .vim/vimrc .vimrc"
+alias setupvim="cd $HOME &&\
+  git clone git@github.com:p-tricky/vim-config.git .vim &&\
+  ln -s .vim/vimrc .vimrc &&\
+  cd .vim/bundle &&\
+  git clone git@github.com:VundleVim/Vundle.vim.git Vundle.vim"
 
 alias installcudaami="\
-  sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub\
-  sudo sh -c 'echo \"deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /\" > /etc/apt/sources.list.d/cuda.list'\
+  sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub &&\
+  sudo sh -c 'echo \"deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /\" > /etc/apt/sources.list.d/cuda.list' &&\
   sudo apt-get update && sudo apt-get install -y --no-install-recommends cuda-drivers"
 
 #java stuff
