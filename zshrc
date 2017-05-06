@@ -83,21 +83,12 @@ export PYTHONSTARTUP=~/.pystartup
 # hist search vi-mode
 bindkey '^R' history-incremental-pattern-search-backward
 
-PATH=$PATH:~/.local/bin
-
-# Android
-PATH=$PATH:~/Android/Sdk/tools:~/Android/Sdk/platform-tools/
-
-export PATH="$PATH:$HOME/miniconda3/bin
-
 # virtualenv and virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/bin/virtualenvwrapper.sh
 
-export CUDA_HOME=/usr/local/cuda
-export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:$LD_LIBRARY_PATH
-export PATH=${CUDA_HOME}/bin:${PATH}
+export CUDA_HOME=/usr/local/cuda-8.0/
 
 # docker
 #export DEVICES="$(ls /dev/nvidia* | xargs -I{} printf '--device {}:{} ')"
@@ -156,9 +147,20 @@ alias installcudaami="\
   sudo apt-get update && sudo apt-get install -y --no-install-recommends cuda-drivers"
 
 #java stuff
-#JAVA_HOME=/usr/local/java/jdk1.8.0_60
-#JRE_HOME=$JAVA_HOME/jre
-#PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
-#export JAVA_HOME
-#export JRE_HOME
-#export PATH
+JAVA_HOME=/usr/local/java/jdk1.8.0_65
+JRE_HOME=$JAVA_HOME/jre
+export JAVA_HOME
+export JRE_HOME
+
+#path stuff no duplicates
+if [[ -z $TMUX ]]; then 
+  PATH=$PATH:~/.local/bin:$ANDROID_HOME/platform-tools/
+  PATH=$PATH:$JRE_HOME/bin:$JAVA_HOME/bin
+  PATH=$PATH:${CUDA_HOME}/bin 
+  PATH=$PATH:~/.local/bin 
+  PATH=$PATH:~/Android/Sdk/tools:~/Android/Sdk/platform-tools/ 
+  PATH="$PATH:$HOME/miniconda3/bin"
+  export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+  export LD_LIBRARY_PATH=${CUDA_HOME}/lib64 
+  . ~/torch/install/bin/torch-activate
+fi
